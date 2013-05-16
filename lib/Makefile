@@ -11,7 +11,7 @@ DEPENDS = $(SOURCES:.cpp=.d)
 
 LDFLAGS = /usr/local/lib/libboost_program_options.a
 
-EXEC = gownta
+EXEC = yahtzee
 
 #######################################
 

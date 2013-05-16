@@ -30,24 +30,19 @@ std::ostream & operator<<(std::ostream & os, Category category);
 // Roll class
 
 class Roll {
-  int n_1 : 3;
-  int n_2 : 3;
-  int n_3 : 3;
-  int n_4 : 3;
-  int n_5 : 3;
-  int n_6 : 3;
+  int n_1 : 4;
+  int n_2 : 4;
+  int n_3 : 4;
+  int n_4 : 4;
+  int n_5 : 4;
+  int n_6 : 4;
 
 public:
   Roll(int n1, int n2, int n3, int n4, int n5, int n6)
       : n_1(n1), n_2(n2), n_3(n3), n_4(n4), n_5(n5), n_6(n6) {}
 
-  Roll(int e) {
-    // TODO
-  }
-  int to_int() const {
-    // TODO
-    return 0;
-  }
+  Roll(int e);
+  int to_int() const;
 
   int count(int v) const {
     switch (v) {

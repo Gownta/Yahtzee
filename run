@@ -69,7 +69,7 @@ echo "========================================"
 echo "Running executable"
 echo
 
-try ./gownta $@
+try ./yahtzee $@
 
 echo
 
