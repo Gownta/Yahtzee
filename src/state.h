@@ -81,10 +81,10 @@ public:
   int to_int() const { return state; }
 
   bool  can_use(Category category) const { return !(state & category); }
-  State set_use(Category category) const { assert(!used(category)); return State(state | category); }
+  State set_use(Category category) const { assert(can_use(category)); return State(state | category); }
 
   bool  can_bonus() const { return state & 0x2000; }
-  STATE set_bonus() const { return State(state | 0x2000); }
+  State set_bonus() const { return State(state | 0x2000); }
 
   int   get_topscore()      const { return (state >> 14) % 64; }
   State inc_topscore(int k) const {
@@ -94,7 +94,7 @@ public:
   }
 
   Roll  get_roll()          const { return Roll((state >> 21) % 256); }
-  State set_roll(Roll roll) const { return State((state & ~(255 << 21)) | (roll.to_int << 21)); }
+  State set_roll(Roll roll) const { return State((state & ~(255 << 21)) | (roll.to_int() << 21)); }
 
   int   get_num_rolls() const { return (state >> 28) % 4; }
   State inc_num_rolls() const { return State(state + 0x10000000); }
