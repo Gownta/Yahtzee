@@ -45,7 +45,7 @@ static int sum(const Roll & roll) {
   return ret;
 }
 
-int score(const Roll & roll, Category category) {
+int score(Roll roll, Category category) {
   switch (category) {
     case ONES:        return roll.count(1)*1;
     case TWOS:        return roll.count(2)*2;
@@ -61,7 +61,6 @@ int score(const Roll & roll, Category category) {
     case LARGE:       return has_large(roll) ? 40 : 0;
     case CHANCE:      return sum(roll);
     case YAHTZEE:     return hasn(roll, 5) ? 50 : 0;
-    case SCRATCHEDY:  assert(false); return 0;
   }
   assert(false);
   return 0;

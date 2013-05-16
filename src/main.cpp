@@ -4,9 +4,6 @@
 
 using namespace std;
 
-#include "roll.h"
-#include "score.h"
-
 int main(int argc, char** argv) {
   srand(time(NULL));
 
@@ -21,6 +18,8 @@ int main(int argc, char** argv) {
     print_options();
     return 1;
   }
+
+  cout << (8 << 1) << ", " << (8 >> 1) << endl;
 
   return 0;
 }

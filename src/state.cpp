@@ -1,7 +1,7 @@
 #include "state.h"
 #include <iostream>
 
-std::ostream & operator<<(std::ostream & os, Category category) {
+std::ostream & operator<<(std::ostream & os, const Category category) {
   switch (category) {
     case ONES:        os << "1s"; break;
     case TWOS:        os << "2s"; break;
@@ -17,27 +17,31 @@ std::ostream & operator<<(std::ostream & os, Category category) {
     case LARGE:       os << "large"; break;
     case CHANCE:      os << "chance"; break;
     case YAHTZEE:     os << "yahtzee"; break;
-    case SCRATCHEDY:  os << "--"; break;
   }
   return os;
 }
 
-std::ostream & operator<<(std::ostream & os, const State & state) {
+std::ostream & operator<<(std::ostream & os, const Roll roll) {
+  for (int r = 1; r <= 6; ++r) for (int i = 0; i < roll.count(v); ++i) os << v << " ";
+  return os;
+}
+
+std::ostream & operator<<(std::ostream & os, const State state) {
   os << "=== Yahtzee State ===\n"
-     << "1s      = " << (state.used(ONES) ? "-" : " ") << "\n"
-     << "2s      = " << (state.used(TWOS) ? "-" : " ") << "\n"
-     << "3s      = " << (state.used(THREES) ? "-" : " ") << "\n"
-     << "4s      = " << (state.used(FOURS) ? "-" : " ") << "\n"
-     << "5s      = " << (state.used(FIVES) ? "-" : " ") << "\n"
-     << "6s      = " << (state.used(SIXES) ? "-" : " ") << "\n"
+     << "1s      = " << (state.can_use(ONES)    ? " " : "-") << "\n"
+     << "2s      = " << (state.can_use(TWOS)    ? " " : "-") << "\n"
+     << "3s      = " << (state.can_use(THREES)  ? " " : "-") << "\n"
+     << "4s      = " << (state.can_use(FOURS)   ? " " : "-") << "\n"
+     << "5s      = " << (state.can_use(FIVES)   ? " " : "-") << "\n"
+     << "6s      = " << (state.can_use(SIXES)   ? " " : "-") << "\n"
      << "(total  = " << state.topscore() << ")\n\n"
-     << "triple  = " << (state.used(TRIPLE) ? "-" : " ") << "\n"
-     << "quad    = " << (state.used(QUAD) ? "-" : " ") << "\n"
-     << "full    = " << (state.used(FULL) ? "-" : " ") << "\n"
-     << "small   = " << (state.used(SMALL) ? "-" : " ") << "\n"
-     << "large   = " << (state.used(LARGE) ? "-" : " ") << "\n"
-     << "chance  = " << (state.used(CHANCE) ? "-" : " ") << "\n"
-     << "yahtzee = " << (state.used(YAHTZEE) ? state.used(SCRATCHEDY) ? "-" : "*" : " ") << "\n"
+     << "triple  = " << (state.can_use(TRIPLE)  ? " " : "-") << "\n"
+     << "quad    = " << (state.can_use(QUAD)    ? " " : "-") << "\n"
+     << "full    = " << (state.can_use(FULL)    ? " " : "-") << "\n"
+     << "small   = " << (state.can_use(SMALL)   ? " " : "-") << "\n"
+     << "large   = " << (state.can_use(LARGE)   ? " " : "-") << "\n"
+     << "chance  = " << (state.can_use(CHANCE)  ? " " : "-") << "\n"
+     << "yahtzee = " << (state.can_bonus() ? "*" : state_can_used(YAHTZEE) ? : " " : "-") << "\n"
   ;
   return os;
 }

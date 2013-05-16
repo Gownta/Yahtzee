@@ -6,7 +6,7 @@
 # trap and abort on Ctrl-c
 control_c()
 {
-  echo "Build aborted"
+  echo "Run aborted"
   exit 1
 }
 trap control_c SIGINT
